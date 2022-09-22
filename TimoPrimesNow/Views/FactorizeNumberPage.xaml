@@ -1,0 +1,175 @@
+﻿<Page
+    x:Class="TimoPrimesNow.Views.FactorizeNumberPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="0,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="0,0,0,0"/>
+                        <Setter Target="PageContentGrid.Margin" Value="0,0,4,4"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="12,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="24,0,0,0"/>
+                        <Setter Target="PageContentGrid.Margin" Value="24,0,4,4"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="PageTitleTextBlock" 
+                   Grid.Row="0"
+                   Style="{StaticResource TimoPrimesNowTitleTextBlockStyle}" 
+                   Text="Factorize number"/>
+
+        <ScrollViewer x:Name="AppBarButtonScrollViewer"
+                      Margin="0,0,0,4"
+                      Grid.Row="1">
+            <StackPanel x:Name="AppBarButtonStackPanel"
+                        Orientation="Horizontal">
+                <AppBarButton x:Name="HomeAppBarButton"
+                              Tapped="HomeAppBarButton_Tapped"
+                              Label="Home"
+                              Icon="Home"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!--page content goes here-->
+        <Grid x:Name="PageContentGrid"
+              Grid.Row="2">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0">
+
+                <StackPanel x:Name="CalculateDataStackPanel" 
+                            Orientation="Horizontal"
+                            Margin="0,12,0,4">
+                    <Button x:Name="CalculateDataButton"
+                            Margin="0,0,4,0"
+                            Style="{StaticResource ButtonRevealStyle}"
+                            ToolTipService.ToolTip="Calculate divisors."
+                            Content="Calculate divisors"
+                            Tapped="CalculateDataButton_Tapped"/>
+
+                    <ProgressRing x:Name="CalculateDataProgressRing"
+                              Margin="4,0,4,0"/>
+                </StackPanel>
+
+                <!--<TextBox x:Name="EnteredProductTextBox"
+                         Margin="0,4,0,4"
+                         TextChanged="EnteredProductTextBoxTextChanged"
+                         PlaceholderText="Please enter a number"
+                         Style="{StaticResource TimoPrimesNowBodyTextBoxStyle}"/>-->
+
+                <StackPanel Margin="0,12,20,0">
+                    <TextBlock Style="{StaticResource TimoPrimesNowSubTitleTextBlockStyle}">
+                            Tap button 'Calculate divisors' to calculate divisors and factors
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}">
+                            Tap button 'Cancel' if you want to cancel calculation.
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1"
+                          ScrollViewer.VerticalScrollBarVisibility="Visible"
+                          ScrollViewer.VerticalScrollMode="Enabled">
+
+                <Grid x:Name="ScrollViewerGrid"
+                      Padding="0,0,12,0">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel x:Name="EnteredNumberStackPanel"
+                                Margin="0,12,4,4"
+                                Grid.Row="0">
+
+                        <TextBox x:Name="EnteredProductTextBox"
+                                 TextChanged="EnteredProductTextBoxTextChanged"
+                                 PlaceholderText="Please enter a number"
+                                 Style="{StaticResource TimoPrimesNowBodyTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel x:Name="ElapsedTimeStackPanel"
+                                Margin="0,4,4,4"
+                                Grid.Row="1">
+
+                        <TextBlock x:Name="ElapsedTimeTextBlock"
+                                   Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel x:Name="DivisorStackPanel"
+                                Margin="0,12,20,4"
+                                Grid.Row="2">
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="CountOfDivisorsHeaderTextBlock"
+                                       Margin="0,4,4,0"
+                                       Text="Count of divisors is"
+                                       Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                            <TextBlock x:Name="CountOfDivisorsTextBlock"
+                                       Margin="0,4,4,0"
+                                       Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                        </StackPanel>
+
+                        <TextBlock x:Name="DivisorsHeaderTextBlock"
+                                   Text="Divisors are:"
+                                   Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                        <TextBlock x:Name="DivisorsTextBlock"
+                                   Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel x:Name="FactorStackPanel"
+                                Margin="0,12,20,4"
+                                Grid.Row="3">
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="CountOfFactorsHeaderTextBlock"
+                                       Margin="0,4,4,0"
+                                       Text="Count of factors is"
+                                       Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                            <TextBlock x:Name="CountOfFactorsTextBlock"
+                                       Margin="0,4,4,0"
+                                       Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                        </StackPanel>
+
+                        <TextBlock x:Name="FactorsHeaderTextBlock"
+                                   Text="Factors are:"
+                                   Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                        <TextBlock x:Name="FactorsTextBlock"
+                                   Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+        <!--page content goes here-->
+    </Grid>
+</Page>

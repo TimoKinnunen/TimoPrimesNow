@@ -1,0 +1,159 @@
+﻿<Page
+    x:Class="TimoPrimesNow.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="0,0,0,0"/>
+                        <Setter Target="PageContentGrid.Margin" Value="0,0,4,4"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="0,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="12,0,0,0"/>
+                        <Setter Target="PageContentGrid.Margin" Value="24,0,4,4"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="24,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="PageTitleTextBlock" 
+                   Grid.Row="0" 
+                   Style="{StaticResource TimoPrimesNowTitleTextBlockStyle}" 
+                   Text="Home"/>
+
+        <ScrollViewer x:Name="AppBarButtonScrollViewer"
+                      Grid.Row="1">
+            <StackPanel x:Name="AppBarButtonStackPanel"
+                        Orientation="Horizontal">
+                <AppBarButton x:Name="HomeAppBarButton"
+                              Label="Home"
+                              Icon="Home"/>
+                <AppBarButton x:Name="ExportSetDataAppBarButton"
+                              Tapped="ExportSetDataAppBarButton_Tapped"
+                              Label="Export set data"
+                              ToolTipService.ToolTip="Export set primenumbers to .json-file from SQLite database."
+                              Icon="Save"/>
+                <ProgressRing x:Name="ExportDataProgressRing"
+                              VerticalAlignment="Center"
+                              Visibility="Collapsed"
+                              Margin="4,0,4,0"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!--page content goes here-->
+        <Grid x:Name="PageContentGrid"
+              Grid.Row="2">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel x:Name="BiggestPrimenumberStackPanel"
+                        Margin="0,12,0,4"
+                        Grid.Row="0">
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="CountOfPrimenumbersHeaderTextBlock"
+                               Margin="0,4,4,0"
+                               Text="Count of primenumbers is"
+                               Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                    <TextBlock x:Name="CountOfPrimenumbersTextBlock"
+                               Margin="0,4,4,0"
+                               Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                </StackPanel>
+
+                <TextBlock x:Name="BiggestPrimenumberHeaderTextBlock"
+                           Text="Biggest primenumber is"
+                           Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                <TextBlock x:Name="BiggestPrimenumberTextBlock"
+                           Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+
+                <TextBlock x:Name="SetInfoTextBlock"
+                           Margin="0,4,4,0"
+                           Text="A set is manageable entity of records."
+                           Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,4,4,0">
+                    <TextBlock x:Name="NumberOfRecordsInOneSetHeaderTextBlock"
+                               Margin="0,0,4,0"
+                               VerticalAlignment="Center"
+                               Text="Number of records in one set is"
+                               Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+
+                    <ComboBox x:Name="NumberOfRecordsInOneSetComboBox"
+                              Margin="0,2,0,0"
+                              PlaceholderText="Pick number of records"
+                              IsEnabled="false"
+                              Width="Auto">
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,8,4,0">
+                    <TextBlock x:Name="SetNumberHeaderTextBlock"
+                               Margin="0,0,4,0"
+                               VerticalAlignment="Center"
+                               Text="Set number is"
+                               Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                    <ComboBox x:Name="SetNumberComboBox"
+                              Margin="0,2,0,0"
+                              PlaceholderText="Pick set number" 
+                              IsEnabled="false"
+                              Width="Auto">
+                    </ComboBox>
+                </StackPanel>
+
+            </StackPanel>
+
+            <TextBox x:Name="SearchPrimenumberTextBox"
+                     Grid.Row="1"
+                     Margin="0,8,4,0"
+                     IsEnabled="false"
+                     HorizontalAlignment="Stretch"
+                     Header="Search primenumber in this set"
+                     PlaceholderText="Enter primenumber to search"
+                     InputScope="Number"
+                     TextChanged="SearchPrimenumberTextChanged"
+                     Style="{StaticResource TimoPrimesNowBodyTextBoxStyle}"/>
+
+            <ListView x:Name="PrimesListView"
+                      HorizontalAlignment="Stretch"
+                      Grid.Row="2"
+                      SelectionMode="Single"
+                      Margin="0,4,4,4">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Primenumber}"
+                                   Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        <!--page content goes here-->
+
+    </Grid>
+</Page>

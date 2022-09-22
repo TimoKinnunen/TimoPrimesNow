@@ -1,0 +1,160 @@
+﻿<Page
+    x:Class="TimoPrimesNow.Views.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="0,0,0,0"/>
+                        <Setter Target="PageContentScrollViewer.Margin" Value="0,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="0,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="12,0,0,0"/>
+                        <Setter Target="PageContentScrollViewer.Margin" Value="24,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="24,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="PageTitleTextBlock" 
+                   Grid.Row="0" 
+                   Style="{StaticResource TimoPrimesNowTitleTextBlockStyle}" 
+                   Text="About"/>
+
+        <ScrollViewer x:Name="AppBarButtonScrollViewer"
+                      Grid.Row="1">
+            <StackPanel x:Name="AppBarButtonStackPanel"
+                        Orientation="Horizontal">
+                <AppBarButton x:Name="HomeAppBarButton"
+                              Tapped="HomeAppBarButton_Tapped"
+                              Label="Home"
+                              Icon="Home"/>
+                <AppBarButton x:Name="ReadMoreAppBarButton"
+                              Tapped="ReadMoreAppBarButton_Tapped"
+                              Label="Read more"
+                              ToolTipService.ToolTip="Read about TimoEratosthenes algorithm"
+                              Icon="Read"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <ScrollViewer x:Name="PageContentScrollViewer"
+                      Grid.Row="2"
+                      Margin="0,12,0,0"
+                      Style="{StaticResource PageContentScrollViewerStyle}">
+            <StackPanel x:Name="PageContentStackPanel">
+
+                <!--page content goes here-->
+
+                <Grid x:Name="VersionGrid">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.RowSpan="3"
+                            Grid.Column="1" 
+                            BorderBrush="DimGray" 
+                            BorderThickness="1"
+                            IsHitTestVisible="False"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Margin="0,0,40,0">
+                        <Border.Background>
+                            <SolidColorBrush Color="{ThemeResource SystemAccentColor}" />
+                        </Border.Background>
+                        <Image x:Name="TimoPrimesNowImage"
+                               Stretch="None" />
+                    </Border>
+                    <TextBlock x:Name="AppDisplayNameTextBlock" 
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               Margin="0,12,0,0" 
+                               Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                    <TextBlock x:Name="PublisherTextBlock"
+                               Grid.Row="1"
+                               Grid.Column="0"
+                               Margin="0,12,0,0" 
+                               Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                    <TextBlock x:Name="VersionTextBlock" 
+                               Grid.Row="2"
+                               Grid.Column="0"
+                               Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                </Grid>
+
+                <HyperlinkButton Content="TimoPrimesNow support website" 
+                                 Margin="0,12,0,0"
+                                 NavigateUri="https://TimoPrimesNow.blogspot.com/"
+                                 Style="{StaticResource TextBlockButtonStyle}"/>
+
+                <TextBlock Style="{StaticResource TimoPrimesNowSubTitleTextBlockStyle}">Hunting primenumbers</TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}">
+                    Brute-force approach is best I can come up with for now. I have found a little magic to calculate primenumbers.
+                    And you get it free in this app!
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource TimoPrimesNowSubTitleTextBlockStyle}">History behind this app</TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}">
+                    E-commerce and cryptography using primenumbers is fascinating and also primenumbers itself. And not to mention factorizing. And to decrypt messages on internet!
+                    This app uses SQLite database and stores primenumbers as strings.
+                </TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowSubTitleTextBlockStyle}">About this app</TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}">
+                    This app can calculate amazing big primenumbers. And it does it quite fast. 
+                    I am in love with BigInteger and SQLite database!
+                </TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowSubTitleTextBlockStyle}">BigInteger</TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}">
+                    The BigInteger (data)type is an immutable (data)type that represents an arbitrarily large integer whose value in theory has no upper or lower bounds.
+                </TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}">
+                    This app uses division with remainder (modulus => a % b == 0) calculating new primenumbers and when double checking primenumbers.
+                </TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowSubTitleTextBlockStyle}">Eratosthenes Sieve</TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}">
+                    It was for me a disappointment to leave Eratosthenes Sieve! I saw that lists of earlier calculated primenumbers would be too big in memory in long run.
+                    See 'Read more'.
+                </TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowSubTitleTextBlockStyle}">SQLite database</TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}">
+                    There is a possibility to copy SQLite database somewhere and look at its content with external tools.
+                    For example DB Browser for SQLite Version 3.12.2.
+                </TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}">
+                    Limitation: SQLite database's table has for column 'Id' datatype integer and it has a max value of 2147483647.
+                    Primenumber is string in SQLite database. And inside calculation methods primenumber is BigInteger.
+                </TextBlock>
+                <!--page content goes here-->
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

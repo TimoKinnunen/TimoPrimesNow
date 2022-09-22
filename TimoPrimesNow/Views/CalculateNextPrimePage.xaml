@@ -1,0 +1,110 @@
+﻿<Page
+    x:Class="TimoPrimesNow.Views.CalculateNextPrimePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="0,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="0,0,0,0"/>
+                        <Setter Target="PageContentGrid.Margin" Value="0,0,4,4"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="12,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="24,0,0,0"/>
+                        <Setter Target="PageContentGrid.Margin" Value="24,0,4,4"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="PageTitleTextBlock" 
+                   Grid.Row="0"
+                   Style="{StaticResource TimoPrimesNowTitleTextBlockStyle}" 
+                   Text="Calculate next primenumber"/>
+
+        <ScrollViewer x:Name="AppBarButtonScrollViewer"
+                      Grid.Row="1">
+            <StackPanel x:Name="AppBarButtonStackPanel"
+                        Orientation="Horizontal">
+                <AppBarButton x:Name="HomeAppBarButton"
+                              Tapped="HomeAppBarButton_Tapped"
+                              Label="Home"
+                              Icon="Home"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!--page content goes here-->
+        <Grid x:Name="PageContentGrid"
+              Grid.Row="2">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel x:Name="CalculateDataStackPanel" 
+                        Grid.Row="0"
+                        Orientation="Horizontal"
+                        Margin="0,12,0,4">
+                <Button x:Name="CalculateDataButton"
+                        Margin="0,0,4,0"
+                        Style="{StaticResource ButtonRevealStyle}"
+                        ToolTipService.ToolTip="Calculate next primenumber."
+                        Content="Calculate next primenumber"
+                        Tapped="CalculateDataButton_Tapped"/>
+
+                <ProgressRing x:Name="CalculateDataProgressRing"
+                              Margin="4,0,4,0"/>
+            </StackPanel>
+
+            <StackPanel x:Name="OddNumberStackPanel"
+                        Margin="0,12,0,4"
+                        Grid.Row="1">
+
+                <TextBox x:Name="EnteredNumberTextBox"
+                         Margin="0,4,0,4"
+                         TextChanged="EnteredNumberTextBoxTextChanged"
+                         PlaceholderText="Please enter number greater than 2"
+                         Style="{StaticResource TimoPrimesNowBodyTextBoxStyle}"/>
+
+                <TextBlock x:Name="FoundPrimenumberTextBlock"
+                           Margin="0,4,0,4"
+                           Text="Next primenumber found is shown here."
+                           Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2"
+                        Margin="0,36,0,0">
+                <TextBlock Style="{StaticResource TimoPrimesNowSubTitleTextBlockStyle}">
+                    Tap button 'Calculate next primenumber' to calculate next primenumber greater than the entered number
+                </TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}">
+                    Tap button 'Cancel' if you want to cancel calculation.
+                </TextBlock>
+                <TextBlock x:Name="TimeElapsedTextBlock" 
+                           Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+            </StackPanel>
+        </Grid>
+        <!--page content goes here-->
+    </Grid>
+</Page>

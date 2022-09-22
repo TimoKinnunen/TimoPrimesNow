@@ -1,0 +1,133 @@
+﻿<Page
+    x:Class="TimoPrimesNow.Views.DatabaseInfoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="0,0,0,0"/>
+                        <Setter Target="PageContentScrollViewer.Margin" Value="0,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="0,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="12,0,0,0"/>
+                        <Setter Target="PageContentScrollViewer.Margin" Value="24,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="24,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="PageTitleTextBlock" 
+                   Grid.Row="0" 
+                   Style="{StaticResource TimoPrimesNowTitleTextBlockStyle}" 
+                   Text="Database info"/>
+
+        <ScrollViewer x:Name="AppBarButtonScrollViewer"
+                      Grid.Row="1">
+            <StackPanel x:Name="AppBarButtonStackPanel"
+                        Orientation="Horizontal">
+                <AppBarButton x:Name="HomeAppBarButton"
+                              Tapped="HomeAppBarButton_Tapped"
+                              Label="Home"
+                              Icon="Home"/>
+                <AppBarButton x:Name="DeleteDatabaseTableAppBarButton"
+                              Margin="0,0,4,0"
+                              Tapped="DeleteDatabaseTableAppBarButton_Tapped"
+                              Label="Delete table"
+                              ToolTipService.ToolTip="Delete database table with primenumbers in SQLite database."
+                              Icon="Delete"/>
+                <ProgressRing x:Name="DeleteDatabaseTableProgressRing"
+                              VerticalAlignment="Center"
+                              Margin="4,0,4,0"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <ScrollViewer x:Name="PageContentScrollViewer"
+                      Grid.Row="2"
+                      Style="{StaticResource PageContentScrollViewerStyle}">
+            <StackPanel x:Name="PageContentStackPanel">
+
+                <!--page content goes here-->
+                <Grid x:Name="VersionGrid">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel x:Name="BiggestPrimenumberStackPanel"
+                                Margin="0,12,0,4"
+                                Grid.Row="0">
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="CountOfPrimenumbersHeaderTextBlock"
+                                       Margin="0,4,4,0"
+                                       Text="Count of primenumbers is"
+                                       Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                            <TextBlock x:Name="CountOfPrimenumbersTextBlock"
+                                       Margin="0,4,4,0"
+                                       Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                        </StackPanel>
+
+                        <TextBlock x:Name="BiggestPrimenumberHeaderTextBlock"
+                                   Text="Biggest primenumber is"
+                                   Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                        <TextBlock x:Name="BiggestPrimenumberTextBlock"
+                                   Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+
+                    </StackPanel>
+
+                    <StackPanel x:Name="DatabaseInfoStackPanel" 
+                                Margin="0,12,0,4"
+                                Grid.Row="1">
+                        <TextBlock Text="Database resides here ...\LocalState\TimoPrimesNow.db" 
+                               Margin="0,12,4,4" 
+                               Style="{StaticResource TimoPrimesNowSubTitleTextBlockStyle}"/>
+                        <TextBlock x:Name="TimoPrimesNowFilePath"
+                               Margin="0,4,4,4" 
+                               Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"
+                               FontSize="10"/>
+                        <TextBlock x:Name="TimoPrimesNowFileSize"
+                               Margin="0,4,4,4" 
+                               Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                        <TextBlock Text="SQLite database is sqlite-net-pcl by SQLite-net version 1.8.116." 
+                               Margin="0,4,4,4" 
+                               Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel x:Name="DatabasePathStackPanel" 
+                                Margin="0,12,0,4"
+                                Grid.Row="2">
+
+                        <Button x:Name="OpenDatabaseFolderButton"
+                                Content="Open database folder"
+                                ToolTipService.ToolTip="Open database folder in Windows explorer"
+                                Tapped="OpenDatabaseFolderButton_Tapped"/>
+                    </StackPanel>
+                </Grid>
+                <!--page content goes here-->
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

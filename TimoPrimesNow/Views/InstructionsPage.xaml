@@ -1,0 +1,135 @@
+﻿<Page
+    x:Class="TimoPrimesNow.Views.InstructionsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="0,0,0,0"/>
+                        <Setter Target="PageContentScrollViewer.Margin" Value="0,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="0,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="12,0,0,0"/>
+                        <Setter Target="PageContentScrollViewer.Margin" Value="24,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="24,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="PageTitleTextBlock" 
+                   Grid.Row="0" 
+                   Style="{StaticResource TimoPrimesNowTitleTextBlockStyle}" 
+                   Text="Instructions"/>
+
+        <ScrollViewer x:Name="AppBarButtonScrollViewer"
+                      Grid.Row="1">
+            <StackPanel x:Name="AppBarButtonStackPanel"
+                        Orientation="Horizontal">
+                <AppBarButton x:Name="HomeAppBarButton"
+                              Tapped="HomeAppBarButton_Tapped"
+                              Label="Home"
+                              Icon="Home"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <ScrollViewer x:Name="PageContentScrollViewer"
+                      Margin="0,12,0,0"
+                      Grid.Row="2"
+                      Style="{StaticResource PageContentScrollViewerStyle}">
+            <StackPanel x:Name="PageContentStackPanel">
+
+                <!--page content goes here-->
+                <TextBlock Style="{StaticResource TimoPrimesNowSubTitleTextBlockStyle}">A prime number</TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}">
+                    A prime number (or a prime) is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+                    Examples of primenumbers are 2, 3, 5, 7....
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource TimoPrimesNowSubTitleTextBlockStyle}">Home page</TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}">
+                    Browse primenumbers you have in a set and search for a primenumber in a set.
+                    A set is manageable entity of records. Maximum number of records in a set is 100000 for convenience.
+                    Export set data to .json-file.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource TimoPrimesNowSubTitleTextBlockStyle}">Calculate new primenumbers page</TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}">
+                    This app lets you calculate new primenumbers. And those are saved in SQLite database as strings.
+                    Because primenumbers are saved as strings in SQLite database table and casted to BigInteger when appropriate, we can bypass datatype integer max value of 2147483647.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource TimoPrimesNowSubTitleTextBlockStyle}">Database info page</TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}">
+                    Delete SQLite database table and start calculating again.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource TimoPrimesNowSubTitleTextBlockStyle}">Double check primenumbers page</TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}">
+                    Sometimes when number of primenumbers grow you want to know if there is a faulty primenumber.
+                    You enter a number and primenumbers in random are checked. This is not scientific approach but can calm you down.
+                    If there is a faulty primenumber you have to start it all over again.
+                    Delete SQLite database table and start calculating again.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource TimoPrimesNowSubTitleTextBlockStyle}">Factorize number page</TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}">
+                    Enter a number and tapp button 'Calculate divisors'. Divisors and factors are calculated and shown.
+                    Entered number is our product. Divisors divide product.
+                    Entered number is our product. Factors divide product in pair.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource TimoPrimesNowSubTitleTextBlockStyle}">Before deleting this app</TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}">
+                    Make a backup before deleting this app. You lose SQLite database file (TimoPrimesNow.db) when this app is deleted.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource TimoPrimesNowSubTitleTextBlockStyle}">Backup data</TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}">
+                    Make a backup of primenumbers by copying SQLite database file (TimoPrimesNow.db) to some other folder.
+                    You can put SQLite database file (TimoPrimesNow.db) back later and continue calculation!
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource TimoPrimesNowSubTitleTextBlockStyle}">DB Browser for SQLite Version 3.12.2</TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}">
+                    Use external tool DB Browser for SQLite Version 3.12.2 to see data in SQLite database file (TimoPrimesNow.db).
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource TimoPrimesNowSubTitleTextBlockStyle}">My laptop calculates primenumbers</TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}">
+                    I let a laptop calculate a week or so and calculation speed is about 3800 primenumbers/minute.
+                    I have now about 70 million primenumbers in SQLite database and biggest is 1368850303. SQLite database size on disk is 1.23 GB.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource TimoPrimesNowSubTitleTextBlockStyle}">SQLite database: Experiment</TextBlock>
+                <TextBlock Style="{StaticResource TimoPrimesNowBodyTextBlockStyle}">
+                    Hunt bigger primenumbers without waiting or disk space is running low?
+                    Make a SQLite database file (TimoPrimesNow.db) with one record Id=1 and Primenumber=1368850303 or something and continue calculation!
+                    Constraint is an odd number entered which is not necessary a primenumber and stored in SQLite database! 
+                    Or delete a lot of records in beginning with external tool and put SQLite database back! Continue calculation! First record should have Id=1 and so forth Id=2, Id=3, ....
+                </TextBlock>
+                <!--page content goes here-->
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
