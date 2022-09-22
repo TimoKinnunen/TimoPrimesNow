@@ -1,0 +1,3 @@
+# TimoPrimesNow
+
+Calculate primenumbers.
